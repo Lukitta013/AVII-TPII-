@@ -11,7 +11,7 @@ export default class Cliente {
     private endereco!: Endereco
     private documentos: Documento[] = []
     private dependentes: Cliente[] = []
-    private titular!: Cliente
+    private titular?: Cliente
 
     constructor(nome: string, nomeSocial: string, dataNascimento: Date) {
         this.nome = nome
@@ -30,5 +30,15 @@ export default class Cliente {
     public get Dependentes() { return this.dependentes }
     public get Titular() { return this.titular }
 
+
     public set Endereco(endereco: Endereco) { this.endereco = endereco }
+    public set Titular(titular: Cliente | undefined) { this.titular = titular }
+    public adiconarDependente(dependente: Cliente) { this.dependentes.push(dependente) }
+    public set Nome(nome: string) { this.nome = nome }
+    public set NomeSocial(nomeSocial: string) { this.nomeSocial = nomeSocial }    
+    
+    public removerDependente(dependente: Cliente): void {
+    let index = this.dependentes.indexOf(dependente)
+    if (index !== -1) this.dependentes.splice(index, 1)
+    }
 }

@@ -1,7 +1,10 @@
 import Processo from "../abstracoes/processo"
 import MenuPrincipal from "../menus/menuPricipal"
-import TipoCadastroCliente from "./tipoCadastroCliente"
-import TipoListagemClientes from "./tipoListagemClientes"
+import TipoCadastroCliente from "./tipos/tipoCadastroCliente"
+import TipoListagemClientes from "./tipos/tipoListagemClientes"
+import TipoEdicaoCliente from "./tipos/tipoEdicaoCliente"
+import TipoExclusaoCliente from "./tipos/tipoExclusaoCliente"     
+import DependenteTornarTitular from "./cliente/dependenteTornarTitular" 
 
 export default class Principal extends Processo {
     constructor() {
@@ -9,16 +12,30 @@ export default class Principal extends Processo {
         this.execucao = true
         this.menu = new MenuPrincipal()
     }
+
     processar(): void {
         this.menu.mostrar()
         this.opcao = this.entrada.receberNumero('Qual opção desejada?')
+
         switch (this.opcao) {
             case 1:
                 this.processo = new TipoCadastroCliente()
                 this.processo.processar()
                 break
+            case 2:                                          
+                this.processo = new TipoEdicaoCliente()
+                this.processo.processar()
+                break
             case 3:
                 this.processo = new TipoListagemClientes()
+                this.processo.processar()
+                break
+            case 4:                                          
+                this.processo = new TipoExclusaoCliente()
+                this.processo.processar()
+                break
+            case 5:
+                this.processo = new DependenteTornarTitular()
                 this.processo.processar()
                 break
             case 0:
@@ -31,3 +48,4 @@ export default class Principal extends Processo {
         }
     }
 }
+// https://www.youtube.com/watch?v=hKARChoQ5I8
